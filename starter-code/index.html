@@ -26,18 +26,37 @@
 
 
 <!-- Header -->
-
 <!-- Brand logo — assets/images/logo.svg (the lockup already includes the "FX_CHECKER" wordmark; use alt="FX Checker") -->
 
 <!-- Dynamic: number of available currencies, e.g. "55" -->
-Currencies · EOD · ECB data
+ <header>
+    <div class="navbar">
+        <div class="logo">
+            <img src="/starter-code/assets/images/logo.svg" alt="">
+            <h1>FX_CHECKER</h1>
+        </div>
 
+        <div class="currencies">
+            <button class="55">55 Currencies</button>
+            <p class="point">.</p>
+            <button class="eod">EOD</button>
+            <p class="point">.</p>
+            <button class="ecb">ECB data</button>
+        </div>
+    </div>
+ </header>
 
-<!-- Live markets ticker — auto-scrolls across the page, pauses on hover -->
+ <!-- Live markets ticker — auto-scrolls across the page, pauses on hover -->
 
-Live markets
 
 <!-- Dynamic: scrolling list of currency pairs, each with its rate and 24h change (▲ up / ▼ down) -->
+
+ <main class="market">
+    <button class="btn-market">Live markets</button>
+ </main>
+
+
+
 
 
 <!-- Converter -->
