@@ -5,4 +5,17 @@
 
 .logo{
     display: flex;
+    align-items: center;
+    gap: 2em;
+    border: 1px solid red;
+    height: 5em;
+}
+
+img{
+    width: 12em;
+    height: 12em;
+}
+h1{
+    font-size: 2em;
+
 }
