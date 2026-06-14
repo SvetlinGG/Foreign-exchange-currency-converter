@@ -2,19 +2,38 @@
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
+    background-color: black;
 }
 
-.logo{
+.logo, .currencies{
     display: flex;
     align-items: center;
     height: 5rem;
 }
 img{
-    width: 12rem;
-    height: 12rem;
+    width: 10rem;
+    height: 10rem;
 }
-h1{
-    font-size: 2rem;
-    font-family: var(--font-text);
-    margin-left: -9rem;
+.currencies{
+    gap:10px;
+    margin: 0 2rem 0 0;
 }
+.curr, .eod, .ecb{
+    text-transform: uppercase;
+    color: white;
+}
+.point{
+    color: white;
+}
+button {
+    border:none;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 5px;
+}
+button:hover{
+    background-color: gray;
+}
+
+
+
