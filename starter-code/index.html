@@ -50,17 +50,22 @@
 <!-- Dynamic: scrolling list of currency pairs, each with its rate and 24h change (▲ up / ▼ down) -->
 
  <main class="market">
-    <button class="btn-market">Live markets</button>
+    <div class="ticker-label">● LIVE MARKETS</div>
  </main>
 
+ <!-- Converter -->
 
-
-
-
-<!-- Converter -->
-
-Check the rate
-
+ <section class="converter-section">
+    <h1>CHECK THE RATE</h1>
+ </section>
+<div class="converter-card">
+    <div class="converter-row">
+        <div class="currency-box">
+            <label for="sendAmount">SEND</label>
+            <input id="sendAmount" type="number" value="1000" />
+        </div>
+    </div>
+</div>
 Send
 <!-- Dynamic: amount to convert (number input, defaults to 1,000) -->
 <!-- Dynamic: selected "send" currency — flag + code; opens the currency picker -->
