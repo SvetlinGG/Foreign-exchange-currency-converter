@@ -1,21 +1,22 @@
 .header{
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .logo{
     display: flex;
     align-items: center;
-    gap: 2em;
+    gap: 2rem;
     border: 1px solid red;
-    height: 5em;
+    height: 5rem;
 }
 
 img{
-    width: 12em;
-    height: 12em;
+    width: 12rem;
+    height: 12rem;
 }
 h1{
-    font-size: 2em;
+    font-size: 2rem;
 
 }
