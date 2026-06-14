@@ -7,16 +7,14 @@
 .logo{
     display: flex;
     align-items: center;
-    gap: 2rem;
-    border: 1px solid red;
+    gap: 0.2rem;
     height: 5rem;
 }
-
 img{
     width: 12rem;
     height: 12rem;
 }
 h1{
     font-size: 2rem;
-
+    font-family: var(--font-text);
 }
