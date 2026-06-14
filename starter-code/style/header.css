@@ -7,7 +7,6 @@
 .logo{
     display: flex;
     align-items: center;
-    gap: 0.2rem;
     height: 5rem;
 }
 img{
@@ -17,4 +16,5 @@ img{
 h1{
     font-size: 2rem;
     font-family: var(--font-text);
+    margin-left: -9rem;
 }
