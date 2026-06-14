@@ -66,16 +66,20 @@
             <label for="sendAmount">SEND</label>
             <!-- Dynamic: amount to convert (number input, defaults to 1,000) -->
             <input id="sendAmount" type="number" value="1000" />
+
+            <select  id="fromCurrency">
+                <option value="USD"><img src="/starter-code/assets/images/flags/us.webp" alt="USA"></option>
+                <option value="USD">🇺🇸 USD</option>
+                <option value="EUR">🇪🇺 EUR</option>
+                <option value="GBP">🇬🇧 GBP</option>
+                <option value="JPY">🇯🇵 JPY</option>
+            </select>
         </div>
+        <button class="swap-btn" id="swapButton">⇆</button>
     </div>
 </div>
 
-<select  id="fromCurrency">
-    <option value="USD"><img src="/starter-code/assets/images/flags/us.webp" alt="USA"></option>
-    <option value="EUR">🇪🇺 EUR</option>
-    <option value="GBP">🇬🇧 GBP</option>
-    <option value="JPY">🇯🇵 JPY</option>
-</select>
+
 </section>
 
 
