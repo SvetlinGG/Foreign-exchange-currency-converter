@@ -75,19 +75,26 @@
                 <option value="JPY">🇯🇵 JPY</option>
             </select>
         </div>
+        <!-- Swap the send and receive currencies (icon button) -->
         <button class="swap-btn" id="swapButton">⇆</button>
+        <!-- Dynamic: converted amount -->
+        <!-- Dynamic: selected "receive" currency — flag + code; opens the currency picker -->
+        <div class="currency-box">
+            <label for="receiveAmount">RECEIVE</label>
+            <input id="receiveAmount" type="number" value="number" readonly/>
+
+            <select id="toCurrency">
+              <option value="EUR">🇪🇺 EUR</option>
+              <option value="USD">🇺🇸 USD</option>
+              <option value="GBP">🇬🇧 GBP</option>
+              <option value="JPY">🇯🇵 JPY</option>
+            </select>
+        </div>
     </div>
 </div>
 
 
 </section>
-
-
-<!-- Swap the send and receive currencies (icon button) -->
-
-Receive
-<!-- Dynamic: converted amount -->
-<!-- Dynamic: selected "receive" currency — flag + code; opens the currency picker -->
 
 <!-- Dynamic: exchange rate for the active pair, e.g. "1 USD = 0.8530 EUR" -->
 
