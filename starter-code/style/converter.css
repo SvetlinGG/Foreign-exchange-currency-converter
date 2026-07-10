@@ -1,0 +1,182 @@
+.converter__heading {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.converter__card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+
+.converter__field {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color 0.2s;
+}
+
+.converter__field:focus-within {
+  border-color: var(--color-accent);
+}
+
+.converter__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+.converter__input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.converter__amount {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  width: 100%;
+}
+
+.converter__amount::placeholder { color: var(--color-text-muted); }
+
+
+.converter__amount::-webkit-outer-spin-button,
+.converter__amount::-webkit-inner-spin-button { -webkit-appearance: none; }
+.converter__amount[type=number] { -moz-appearance: textfield; }
+
+
+.converter__currency-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-surface-3);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.converter__currency-btn:hover {
+  background-color: var(--color-border-light);
+  border-color: var(--color-text-muted);
+}
+
+.converter__flag {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.converter__swap {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-secondary);
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.converter__swap:hover {
+  background-color: var(--color-surface-3);
+  border-color: var(--color-accent);
+  transform: rotate(180deg);
+}
+
+.converter__swap img { width: 1rem; height: 1rem; filter: invert(1); }
+
+
+.converter__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.converter__rate {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.converter__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.converter__favorite,
+.converter__log {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.converter__favorite {
+  background-color: transparent;
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-secondary);
+}
+
+.converter__favorite:hover,
+.converter__favorite[aria-pressed="true"] {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.converter__favorite img { width: 0.875rem; filter: invert(0.5); }
+.converter__favorite[aria-pressed="true"] img { filter: invert(1) sepia(1) saturate(5) hue-rotate(20deg); }
+
+.converter__log {
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: #000;
+}
+
+.converter__log:hover { background-color: var(--color-accent-hover); }
+.converter__log img { width: 0.875rem; }
