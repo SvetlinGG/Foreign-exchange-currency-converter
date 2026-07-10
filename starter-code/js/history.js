@@ -4,7 +4,7 @@ import { getActivePair } from './converter.js';
 const chartEl     = document.getElementById('historyChart');
 const errorEl     = document.getElementById('historyError');
 const errorPairEl = document.getElementById('errorPair');
-const rangeBtns   = document.querySelectorAll('.history__range-btn');
+const rangeBtns   = document.querySelectorAll('.range-switcher__btn');
 const openEl      = document.getElementById('historyOpen');
 const lastEl      = document.getElementById('historyLast');
 const changeEl    = document.getElementById('historyChange');
@@ -32,12 +32,9 @@ function updateStats(rates) {
 }
 
 function drawChart(dates, values) {
-  chartEl.innerHTML = '';
-
-  const canvas = document.createElement('canvas');
-  canvas.width  = chartEl.clientWidth  || 600;
-  canvas.height = chartEl.clientHeight || 220;
-  chartEl.appendChild(canvas);
+  const canvas = chartEl;
+  canvas.width  = canvas.clientWidth  || 600;
+  canvas.height = canvas.clientHeight || 280;
 
   const ctx  = canvas.getContext('2d');
   const W    = canvas.width;
@@ -117,8 +114,8 @@ export async function loadHistory(range = activeRange) {
 export function initHistory() {
   rangeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      rangeBtns.forEach(b => { b.classList.remove('history__range-btn--active'); b.setAttribute('aria-pressed', 'false'); });
-      btn.classList.add('history__range-btn--active');
+      rangeBtns.forEach(b => { b.classList.remove('range-switcher__btn--active'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('range-switcher__btn--active');
       btn.setAttribute('aria-pressed', 'true');
       loadHistory(btn.dataset.range);
     });

@@ -26,19 +26,23 @@ function renderRow(base, code, name, rate, amount) {
   const converted = (amount * rate).toFixed(2);
   const pinned    = isFavorite(base, code);
   const li        = document.createElement('li');
-  li.className    = 'compare__item';
+  li.className    = 'compare-item';
   li.dataset.code = code;
   li.innerHTML = `
-    <img class="compare__flag" src="/starter-code/assets/images/flags/${getFlagCode(code)}.webp" alt="${code}" onerror="this.style.display='none'">
-    <span class="compare__code">${code}</span>
-    <span class="compare__name">${name ?? ''}</span>
-    <span class="compare__converted">${converted}</span>
-    <span class="compare__rate">@ ${rate.toFixed(4)}</span>
-    <button class="compare__pin" aria-label="${pinned ? 'Unpin' : 'Pin'} ${base}/${code}" aria-pressed="${pinned}">
+    <img class="compare-item__flag" src="/starter-code/assets/images/flags/${getFlagCode(code)}.webp" alt="${code}" onerror="this.style.display='none'">
+    <div class="compare-item__main">
+      <span class="compare-item__code">${code}</span>
+      <span class="compare-item__name">${name ?? ''}</span>
+    </div>
+    <div class="compare-item__values">
+      <span class="compare-item__value">${converted}</span>
+      <span class="compare-item__rate">@ ${rate.toFixed(4)}</span>
+    </div>
+    <button class="compare-item__pin" aria-label="${pinned ? 'Unpin' : 'Pin'} ${base}/${code}" aria-pressed="${pinned}">
       <img src="/starter-code/assets/images/${pinned ? 'icon-star-filled' : 'icon-star'}.svg" alt="">
     </button>
   `;
-  li.querySelector('.compare__pin').addEventListener('click', e => {
+  li.querySelector('.compare-item__pin').addEventListener('click', e => {
     const btn = e.currentTarget;
     const isPinned = btn.getAttribute('aria-pressed') === 'true';
     isPinned ? removeFavorite(base, code) : addFavorite(base, code);

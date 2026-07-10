@@ -7,13 +7,13 @@ const popularList = document.getElementById('popularList');
 const otherList   = document.getElementById('otherList');
 const popularCount = document.getElementById('popularCount');
 const otherCount   = document.getElementById('otherCount');
-const closeBtn    = document.getElementById('pickerCloseBtn');
 
 const POPULAR = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'HKD', 'SGD'];
 
 let allCurrencies = {};
 let activeSide = 'from';
 let activeCode = 'USD';
+let anchorBtn  = null;
 
 function getFlagCode(code) {
   const overrides = { EUR: 'eu', USD: 'us', GBP: 'gb', AUD: 'au', CAD: 'ca',
@@ -38,7 +38,7 @@ function renderRow(code, name) {
   `;
   li.addEventListener('click', () => {
     setCurrency(activeSide, code);
-    dialog.close();
+    closePicker();
   });
   return li;
 }
@@ -61,29 +61,52 @@ function renderLists(query = '') {
   otherCount.textContent   = other.length;
 }
 
-export function openPicker(side, currentCode) {
+function positionDialog() {
+  if (!anchorBtn) return;
+  const rect = anchorBtn.getBoundingClientRect();
+  dialog.style.position = 'fixed';
+  dialog.style.top  = `${rect.bottom + 8}px`;
+  dialog.style.right = `${window.innerWidth - rect.right}px`;
+  dialog.style.left = 'auto';
+  dialog.style.margin = '0';
+}
+
+function closePicker() {
+  dialog.close();
+  anchorBtn?.setAttribute('aria-expanded', 'false');
+  anchorBtn?.classList.remove('currency-btn--open');
+}
+
+export function openPicker(side, currentCode, btn) {
   activeSide = side;
   activeCode = currentCode;
+  anchorBtn  = btn;
   searchInput.value = '';
   renderLists();
-  dialog.showModal();
+  positionDialog();
+  dialog.show();
+  anchorBtn?.setAttribute('aria-expanded', 'true');
+  anchorBtn?.classList.add('currency-btn--open');
   searchInput.focus();
 }
 
 export async function initPicker() {
   allCurrencies = await getCurrencies();
 
-  document.getElementById('fromCurrencyBtn').addEventListener('click', () =>
-    openPicker('from', document.getElementById('fromCode').textContent)
-  );
-  document.getElementById('toCurrencyBtn').addEventListener('click', () =>
-    openPicker('to', document.getElementById('toCode').textContent)
-  );
+  document.getElementById('fromCurrencyBtn').addEventListener('click', function() {
+    openPicker('from', document.getElementById('fromCode').textContent, this);
+  });
+  document.getElementById('toCurrencyBtn').addEventListener('click', function() {
+    openPicker('to', document.getElementById('toCode').textContent, this);
+  });
 
-  closeBtn.addEventListener('click', () => dialog.close());
+  document.addEventListener('click', e => {
+    if (!dialog.open) return;
+    if (!dialog.contains(e.target) && e.target !== anchorBtn) closePicker();
+  });
 
-  dialog.addEventListener('click', e => {
-    if (e.target === dialog) dialog.close();
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && dialog.open) closePicker();
   });
 
   searchInput.addEventListener('input', () => renderLists(searchInput.value));

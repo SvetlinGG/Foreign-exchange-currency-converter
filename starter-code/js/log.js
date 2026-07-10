@@ -19,21 +19,25 @@ function relativeTime(timestamp) {
 function renderRow(entry) {
   const { id, base, target, amount, result, timestamp } = entry;
   const li = document.createElement('li');
-  li.className  = 'log__item';
+  li.className  = 'logged-item';
   li.dataset.id = id;
   li.innerHTML = `
-    <span class="log__time">${relativeTime(timestamp)}</span>
-    <span class="log__pair">${base} → ${target}</span>
-    <span class="log__amounts">
-      <span class="log__send">${amount.toLocaleString()} ${base}</span>
-      <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="=" class="log__arrow">
-      <span class="log__receive">${result.toLocaleString()} ${target}</span>
-    </span>
-    <button class="log__delete" aria-label="Delete this conversion">
+    <span class="logged-item__time">${relativeTime(timestamp)}</span>
+    <div class="logged-item__pair">
+      <span class="logged-item__code">${base}</span>
+      <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="to" class="logged-item__arrow">
+      <span class="logged-item__code">${target}</span>
+    </div>
+    <div class="logged-item__amounts">
+      <span class="logged-item__from">${amount.toLocaleString()} ${base}</span>
+      <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="=" class="logged-item__arrow">
+      <span class="logged-item__to">${result.toLocaleString()} ${target}</span>
+    </div>
+    <button class="icon-btn icon-btn--delete" aria-label="Delete this conversion">
       <img src="/starter-code/assets/images/icon-delete.svg" alt="">
     </button>
   `;
-  li.querySelector('.log__delete').addEventListener('click', () => {
+  li.querySelector('.icon-btn--delete').addEventListener('click', () => {
     removeLogEntry(id);
     document.dispatchEvent(new CustomEvent('fx:log-changed'));
   });

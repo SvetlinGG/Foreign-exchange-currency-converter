@@ -1,36 +1,30 @@
 .currency-picker {
-  z-index: 200;
+  z-index: 300;
   background: var(--neutral-700);
   border-radius: var(--radius-12);
-  width: 300px;
+  width: 320px;
   max-width: min(90vw, 360px);
-  box-shadow: inset 0 0 0 1px var(--neutral-500), 0 12px 32px rgba(0,0,0,.5);
+  box-shadow: inset 0 0 0 1px var(--neutral-500), 0 16px 40px rgba(0,0,0,.6);
   flex-direction: column;
   gap: 8px;
   padding: 12px;
-  display: flex;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
+  display: none;
   border: none;
+  position: fixed;
 }
 
+.currency-picker[open] { display: flex; }
 .currency-picker::backdrop { display: none; }
 
-.currency-picker__header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
 
-/* search */
 .currency-picker__search-wrap {
-  border-radius: var(--radius-6);
-  box-shadow: inset 0 0 0 1px var(--neutral-200);
-  padding: var(--spacing-150);
+  border-radius: var(--radius-8);
+  box-shadow: inset 0 0 0 1px var(--neutral-500);
+  padding: var(--spacing-125) var(--spacing-150);
   align-items: center;
-  gap: var(--spacing-125);
+  gap: var(--spacing-100);
   display: flex;
+  background: var(--neutral-600);
 }
 
 .currency-picker__search-wrap:focus-within {
@@ -39,7 +33,7 @@
 
 .currency-picker__search-wrap img {
   width: 14px;
-  filter: invert(0.6);
+  filter: invert(0.5);
   flex-shrink: 0;
 }
 
@@ -52,78 +46,67 @@
   background: none;
   border: none;
   flex: 1;
-  font-size: 12px;
+  font-size: 13px;
   outline: none;
 }
 
-.currency-picker__search::placeholder { color: var(--neutral-200); }
+.currency-picker__search::placeholder { color: var(--neutral-400); }
 
-.currency-picker__close { display: none; }
 
-/* body */
 .currency-picker__body {
   flex-direction: column;
   gap: 4px;
-  max-height: 320px;
+  max-height: 340px;
   display: flex;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-500) transparent;
 }
 
-.currency-picker__group {
-  flex-direction: column;
-  gap: 4px;
-  display: flex;
-}
+.currency-picker__body::-webkit-scrollbar { width: 4px; }
+.currency-picker__body::-webkit-scrollbar-thumb { background: var(--neutral-500); border-radius: 2px; }
 
+.currency-picker__group { flex-direction: column; gap: 4px; display: flex; }
 .currency-picker__group + .currency-picker__group { margin-top: 8px; }
 
 .currency-picker__group-title {
   font-family: var(--font-mono);
   letter-spacing: 1.5px;
-  color: var(--neutral-200);
+  color: var(--neutral-400);
   justify-content: space-between;
   align-items: center;
   padding: 4px 8px;
   font-size: 10px;
   display: flex;
-  font-weight: 400;
+  text-transform: uppercase;
 }
 
-.currency-picker__count {
-  color: var(--neutral-400);
-  letter-spacing: .5px;
-}
+.currency-picker__count { color: var(--neutral-500); letter-spacing: .5px; }
 
-/* rows */
-.currency-picker__list {
-  flex-direction: column;
-  gap: 4px;
-  display: flex;
-}
+
+.currency-picker__list { flex-direction: column; gap: 2px; display: flex; }
 
 .currency-picker__item {
   align-items: center;
   gap: var(--spacing-150);
-  border-radius: var(--radius-4);
-  padding: var(--spacing-150) var(--spacing-100);
-  background: var(--neutral-600);
-  box-shadow: inset 0 0 0 1px var(--neutral-600);
+  border-radius: var(--radius-6);
+  padding: var(--spacing-125) var(--spacing-100);
+  background: transparent;
   display: flex;
   cursor: pointer;
   border: none;
   width: 100%;
   text-align: left;
   font: inherit;
+  transition: background .1s;
 }
 
-.currency-picker__item:hover {
-  background: var(--neutral-500);
-  box-shadow: inset 0 0 0 1px var(--neutral-400);
-}
+.currency-picker__item:hover { background: var(--neutral-600); }
 
 .currency-picker__item:focus-visible {
   box-shadow: inset 0 0 0 2px var(--lime-500);
   outline: none;
+  border-radius: var(--radius-6);
 }
 
 .currency-picker__flag {
@@ -139,17 +122,23 @@
   color: var(--neutral-50);
   flex-shrink: 0;
   font-size: 13px;
+  font-weight: 700;
+  width: 36px;
 }
 
 .currency-picker__name {
   font-family: var(--font-sans);
-  color: var(--neutral-200);
+  color: var(--neutral-400);
   flex: 1;
-  font-size: 13px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .currency-picker__check {
   width: 14px;
   margin-left: auto;
+  flex-shrink: 0;
   filter: invert(87%) sepia(60%) saturate(500%) hue-rotate(20deg);
 }

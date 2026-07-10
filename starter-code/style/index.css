@@ -2,12 +2,12 @@
 @import url("./header.css");
 @import url("./ticker.css");
 @import url("./converter.css");
-@import url("./picker.css");
 @import url("./tabs.css");
 @import url("./history.css");
 @import url("./compare.css");
 @import url("./favorites.css");
 @import url("./log.css");
+@import url("./picker.css");
 @import url("./responsive.css");
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,39 +15,51 @@
 button, input, select, textarea {
   font: inherit;
   color: inherit;
-  appearance: none;
-  cursor: pointer;
   background: none;
   border: none;
   padding: 0;
 }
 
 img, svg { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+ul, ol   { list-style: none; }
+a        { color: inherit; text-decoration: none; }
+h1, h2   { font-weight: 400; }
 
 body {
   background: var(--neutral-900);
   color: var(--neutral-50);
   font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
 }
 
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
-[role=button]:focus-visible,
 [role=tab]:focus-visible,
-[role=option]:focus-visible,
-[tabindex]:focus-visible {
+[role=option]:focus-visible {
   outline: 2px solid var(--lime-500);
   outline-offset: 2px;
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-4);
 }
 
-.app-body {
-  max-width: 1132px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-600);
+.app-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  min-height: calc(100vh - 88px);
+}
+
+.app-sidebar {
+  border-right: 1px solid var(--neutral-600);
+  padding: var(--spacing-400);
+  position: sticky;
+  top: 88px;
+  height: calc(100vh - 88px);
+  overflow-y: auto;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }

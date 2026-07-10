@@ -9,298 +9,241 @@
 </head>
 <body>
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="header">
-    <div class="header__inner">
-      <a href="/" class="header__logo">
-        <img src="/starter-code/assets/images/logo.svg" alt="FX Checker">
-      </a>
-      <div class="header__meta" aria-label="Data source info">
-        <span class="header__meta-item" id="currencyCount">-- Currencies</span>
-        <span class="header__meta-sep" aria-hidden="true">·</span>
-        <span class="header__meta-item">EOD</span>
-        <span class="header__meta-sep" aria-hidden="true">·</span>
-        <span class="header__meta-item">ECB data</span>
+  <nav class="app-nav">
+    <div class="app-nav__inner">
+      <div class="app-nav__top">
+        <div class="app-nav__brand">
+          <img src="/starter-code/assets/images/logo.svg" alt="FX Checker">
+          <span class="app-nav__meta" id="currencyCount">-- Currencies · EOD · ECB data</span>
+        </div>
+      </div>
+      <div class="app-nav__markets">
+        <div class="app-nav__live">
+          <span class="app-nav__dot"></span>
+          Live
+        </div>
+        <div class="app-nav__ticker-wrap">
+          <ul class="app-nav__ticker" id="tickerList" aria-label="Live currency rates"></ul>
+        </div>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- ═══ LIVE MARKETS TICKER ═══ -->
-  <div class="ticker" aria-label="Live currency rates">
-    <span class="ticker__label" aria-hidden="true">● Live Markets</span>
-    <div class="ticker__track">
-      <ul class="ticker__list" id="tickerList">
-        <!-- Dynamic: ticker items injected by JS -->
-      </ul>
-    </div>
-  </div>
+  <div class="app-layout">
 
-  <!-- ═══ MAIN LAYOUT ═══ -->
-  <main class="layout">
-
-    <!-- ── LEFT COLUMN: Converter ── -->
-    <div class="layout__left">
+    <aside class="app-sidebar">
       <section class="converter" aria-labelledby="converterHeading">
         <h1 class="converter__heading" id="converterHeading">Check the rate</h1>
 
-        <div class="converter__card">
+        <div class="conv-group">
+          <div class="conv-group__top">
+            <div class="conv-card">
+              <span class="conv-card__label">Send</span>
+              <div class="conv-card__bottom">
+                <input class="conv-card__input" id="sendAmount" type="number" value="1000" placeholder="0" aria-label="Amount to send">
+                <div class="currency-select">
+                  <button class="currency-btn" id="fromCurrencyBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select send currency">
+                    <img class="flag" id="fromFlag" src="/starter-code/assets/images/flags/us.webp" alt="">
+                    <span id="fromCode">USD</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-          <!-- Send -->
-          <div class="converter__field">
-            <label class="converter__label" for="sendAmount">Send</label>
-            <div class="converter__input-row">
-              <input
-                class="converter__amount"
-                id="sendAmount"
-                type="number"
-                value="1000"
-                min="0"
-                aria-label="Amount to send"
-              >
-              <button
-                class="converter__currency-btn"
-                id="fromCurrencyBtn"
-                aria-haspopup="dialog"
-                aria-label="Select send currency"
-              >
-                <img class="converter__flag" id="fromFlag" src="/starter-code/assets/images/flags/us.webp" alt="">
-                <span id="fromCode">USD</span>
-                <img src="/starter-code/assets/images/icon-chevron-down.svg" alt="" aria-hidden="true">
+            <div class="conv-group__swap">
+              <button class="icon-btn icon-btn--exchange" id="swapBtn" aria-label="Swap currencies">
+                <img src="/starter-code/assets/images/icon-exchange-vertical.svg" alt="">
               </button>
+            </div>
+
+            <div class="conv-card">
+              <span class="conv-card__label">Receive</span>
+              <div class="conv-card__bottom">
+                <input class="conv-card__input conv-card__input--result" id="receiveAmount" type="text" readonly placeholder="0" aria-label="Converted amount" aria-live="polite">
+                <div class="currency-select">
+                  <button class="currency-btn" id="toCurrencyBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select receive currency">
+                    <img class="flag" id="toFlag" src="/starter-code/assets/images/flags/eu.webp" alt="">
+                    <span id="toCode">EUR</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Swap -->
-          <button class="converter__swap" id="swapBtn" aria-label="Swap currencies">
-            <img src="/starter-code/assets/images/icon-exchange-vertical.svg" alt="">
-          </button>
+          <hr class="conv-divider">
 
-          <!-- Receive -->
-          <div class="converter__field">
-            <label class="converter__label" for="receiveAmount">Receive</label>
-            <div class="converter__input-row">
-              <input
-                class="converter__amount"
-                id="receiveAmount"
-                type="text"
-                readonly
-                aria-label="Converted amount"
-                aria-live="polite"
-              >
-              <button
-                class="converter__currency-btn"
-                id="toCurrencyBtn"
-                aria-haspopup="dialog"
-                aria-label="Select receive currency"
-              >
-                <img class="converter__flag" id="toFlag" src="/starter-code/assets/images/flags/eu.webp" alt="">
-                <span id="toCode">EUR</span>
-                <img src="/starter-code/assets/images/icon-chevron-down.svg" alt="" aria-hidden="true">
-              </button>
+          <div class="converter__rate-row">
+            <div class="converter__rate-info">
+              <span class="converter__rate-label" id="convertRate">1 USD = -- EUR</span>
+              <span class="converter__separator">·</span>
+              <span class="converter__live-badge">LIVE</span>
             </div>
-          </div>
-
-          <!-- Rate + Actions -->
-          <div class="converter__footer">
-            <p class="converter__rate" id="convertRate" aria-live="polite">1 USD = -- EUR</p>
             <div class="converter__actions">
-              <button class="converter__favorite" id="favoriteBtn" aria-pressed="false">
+              <button class="fav-btn" id="favoriteBtn" aria-pressed="false">
                 <img src="/starter-code/assets/images/icon-star.svg" alt="" aria-hidden="true">
                 <span id="favoriteBtnLabel">Favorite</span>
               </button>
-              <button class="converter__log" id="logBtn">
+              <button class="log-btn" id="logBtn">
                 <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="" aria-hidden="true">
                 Log conversion
               </button>
             </div>
           </div>
-
         </div>
       </section>
-    </div>
+    </aside>
 
-    <!-- ── RIGHT COLUMN: Tabs ── -->
-    <div class="layout__right">
-
-      <!-- Tab nav -->
-      <nav class="tabs" aria-label="Currency tools">
-        <ul class="tabs__list" role="tablist">
-          <li role="presentation">
-            <button class="tabs__tab tabs__tab--active" role="tab" id="tab-history"
-              aria-selected="true" aria-controls="panel-history">History</button>
-          </li>
-          <li role="presentation">
-            <button class="tabs__tab" role="tab" id="tab-compare"
-              aria-selected="false" aria-controls="panel-compare">Compare</button>
-          </li>
-          <li role="presentation">
-            <button class="tabs__tab" role="tab" id="tab-favorites"
-              aria-selected="false" aria-controls="panel-favorites">
-              Favorites
+    <main class="app-main">
+      <div class="app-tabbar">
+        <div class="tabbar" role="tablist" aria-label="Currency tools">
+          <button class="tabs__tab tabs__tab--active" role="tab" id="tab-history" aria-selected="true" aria-controls="panel-history">
+            <div class="tabs__tab-inner"><span class="tabs__tab-label">History</span></div>
+            <div class="tabs__underline"></div>
+          </button>
+          <button class="tabs__tab" role="tab" id="tab-compare" aria-selected="false" aria-controls="panel-compare">
+            <div class="tabs__tab-inner"><span class="tabs__tab-label">Compare</span></div>
+            <div class="tabs__underline"></div>
+          </button>
+          <button class="tabs__tab" role="tab" id="tab-favorites" aria-selected="false" aria-controls="panel-favorites">
+            <div class="tabs__tab-inner">
+              <span class="tabs__tab-label">Favorites</span>
               <span class="tabs__badge" id="favoritesCount" aria-label="favorited pairs"></span>
-            </button>
-          </li>
-          <li role="presentation">
-            <button class="tabs__tab" role="tab" id="tab-log"
-              aria-selected="false" aria-controls="panel-log">
-              Log
+            </div>
+            <div class="tabs__underline"></div>
+          </button>
+          <button class="tabs__tab" role="tab" id="tab-log" aria-selected="false" aria-controls="panel-log">
+            <div class="tabs__tab-inner">
+              <span class="tabs__tab-label">Log</span>
               <span class="tabs__badge" id="logCount" aria-label="logged conversions"></span>
-            </button>
-          </li>
-        </ul>
-      </nav>
+            </div>
+            <div class="tabs__underline"></div>
+          </button>
+        </div>
+      </div>
 
-      <!-- ── PANEL: History ── -->
-      <section class="tab-panel" id="panel-history" role="tabpanel" aria-labelledby="tab-history">
+      <div class="tab-content">
 
-        <div class="history__stats" aria-label="Rate statistics">
-          <div class="history__stat">
-            <span class="history__stat-label">Open</span>
-            <span class="history__stat-value" id="historyOpen">--</span>
+        <section class="tab-panel" id="panel-history" role="tabpanel" aria-labelledby="tab-history">
+          <div class="history-panel">
+            <div class="history-panel__top">
+              <div class="stat-row">
+                <div class="stat-box">
+                  <span class="stat-box__label">Open</span>
+                  <span class="stat-box__value" id="historyOpen">--</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-box__label">Last</span>
+                  <span class="stat-box__value" id="historyLast">--</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-box__label">Change</span>
+                  <span class="stat-box__value" id="historyChange">--</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-box__label">% Change</span>
+                  <span class="stat-box__value" id="historyPctChange">--</span>
+                </div>
+              </div>
+              <div class="range-switcher" role="group" aria-label="Chart time range">
+                <button class="range-switcher__btn" aria-pressed="false" data-range="1D">1D</button>
+                <button class="range-switcher__btn" aria-pressed="false" data-range="1W">1W</button>
+                <button class="range-switcher__btn range-switcher__btn--active" aria-pressed="true" data-range="1M">1M</button>
+                <button class="range-switcher__btn" aria-pressed="false" data-range="3M">3M</button>
+                <button class="range-switcher__btn" aria-pressed="false" data-range="1Y">1Y</button>
+                <button class="range-switcher__btn" aria-pressed="false" data-range="5Y">5Y</button>
+              </div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card__header">
+                <span class="chart-card__pair" id="chartPair">USD/EUR</span>
+                <span class="chart-card__meta" id="chartRate"></span>
+              </div>
+              <canvas class="chart-card__canvas" id="historyChart" aria-label="Rate history chart"></canvas>
+              <div class="chart-card__notice" id="historyError" hidden>
+                We couldn't load rate history for <span id="errorPair"></span> right now.
+              </div>
+            </div>
           </div>
-          <div class="history__stat">
-            <span class="history__stat-label">Last</span>
-            <span class="history__stat-value" id="historyLast">--</span>
+        </section>
+
+        <section class="tab-panel" id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
+          <div class="compare-panel">
+            <div class="compare-panel__header">
+              <p class="compare-panel__title">Multi-currency · <strong id="compareAmount"></strong></p>
+              <span class="compare-panel__count" id="compareCount"></span>
+            </div>
+            <ul class="compare-panel__list" id="compareList" aria-label="Currency comparison"></ul>
+            <div class="empty-state" id="compareEmpty">
+              <p class="empty-state__title">No comparison available</p>
+              <p class="empty-state__desc">Enter an amount in Send above to see what your money is worth in other currencies.</p>
+            </div>
           </div>
-          <div class="history__stat">
-            <span class="history__stat-label">Change</span>
-            <span class="history__stat-value" id="historyChange">--</span>
+        </section>
+
+        <section class="tab-panel" id="panel-favorites" role="tabpanel" aria-labelledby="tab-favorites" hidden>
+          <div class="favorites-panel">
+            <div class="favorites-panel__header">
+              <h2 class="favorites-panel__title">Pinned pairs</h2>
+              <span class="favorites-panel__count" id="favoritesTotal"></span>
+            </div>
+            <ul class="favorites-panel__list" id="favoritesList" aria-label="Pinned currency pairs"></ul>
+            <div class="empty-state" id="favoritesEmpty">
+              <p class="empty-state__title">No pinned pairs yet</p>
+              <p class="empty-state__desc">Pin a pair to track its rate here. Tap the star icon on any conversion or comparison row.</p>
+            </div>
           </div>
-          <div class="history__stat">
-            <span class="history__stat-label">% Change</span>
-            <span class="history__stat-value" id="historyPctChange">--</span>
+        </section>
+
+        <section class="tab-panel" id="panel-log" role="tabpanel" aria-labelledby="tab-log" hidden>
+          <div class="log-panel">
+            <div class="log-header">
+              <h2 class="log-header__title">Conversion log</h2>
+              <div class="log-header__meta">
+                <span class="log-header__count" id="logTotal"></span>
+                <button class="clear-btn" id="logClearBtn" hidden>Clear all</button>
+              </div>
+            </div>
+            <ul class="log-list" id="logList" aria-label="Conversion history"></ul>
+            <div class="empty-state" id="logEmpty">
+              <p class="empty-state__title">No conversions logged yet</p>
+              <p class="empty-state__desc">Every conversion is recorded here automatically when you tap Log conversion.</p>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <div class="history__toolbar">
-          <div class="history__pair">
-            <span id="chartPair">USD/EUR</span>
-            <span id="chartRate"></span>
-          </div>
-          <div class="history__range" role="group" aria-label="Chart time range">
-            <button class="history__range-btn history__range-btn--active" aria-pressed="true" data-range="1D">1D</button>
-            <button class="history__range-btn" aria-pressed="false" data-range="1W">1W</button>
-            <button class="history__range-btn" aria-pressed="false" data-range="1M">1M</button>
-            <button class="history__range-btn" aria-pressed="false" data-range="3M">3M</button>
-            <button class="history__range-btn" aria-pressed="false" data-range="1Y">1Y</button>
-            <button class="history__range-btn" aria-pressed="false" data-range="5Y">5Y</button>
-          </div>
-        </div>
+      </div>
+    </main>
 
-        <div class="history__chart" id="historyChart" aria-label="Rate history chart"></div>
+  </div>
 
-        <div class="history__error" id="historyError" hidden>
-          <p class="history__error-title">No chart data available</p>
-          <p class="history__error-body">
-            We couldn't load rate history for <strong id="errorPair"></strong> right now.
-            This usually clears up in a minute.
-          </p>
-        </div>
+  <script src="/starter-code/js/app.js" type="module"></script>
 
-      </section>
-
-      <!-- ── PANEL: Compare ── -->
-      <section class="tab-panel" id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
-
-        <div class="compare__header">
-          <h2 class="compare__title">Multi-currency</h2>
-          <p class="compare__meta">
-            <span id="compareAmount"></span>
-            <span class="compare__count" id="compareCount"></span>
-          </p>
-        </div>
-
-        <ul class="compare__list" id="compareList" aria-label="Currency comparison">
-          <!-- Dynamic: comparison rows injected by JS -->
-        </ul>
-
-        <div class="compare__empty" id="compareEmpty">
-          <p class="compare__empty-title">No comparison available</p>
-          <p class="compare__empty-body">Enter an amount in Send above to see what your money is worth in other currencies.</p>
-        </div>
-
-      </section>
-
-      <!-- ── PANEL: Favorites ── -->
-      <section class="tab-panel" id="panel-favorites" role="tabpanel" aria-labelledby="tab-favorites" hidden>
-
-        <div class="favorites__header">
-          <h2 class="favorites__title">Pinned pairs</h2>
-          <span class="favorites__count" id="favoritesTotal"></span>
-        </div>
-
-        <ul class="favorites__list" id="favoritesList" aria-label="Pinned currency pairs">
-          <!-- Dynamic: favorite rows injected by JS -->
-        </ul>
-
-        <div class="favorites__empty" id="favoritesEmpty">
-          <p class="favorites__empty-title">No pinned pairs yet</p>
-          <p class="favorites__empty-body">Pin a pair to track its rate here. Tap the star icon on any conversion or comparison row.</p>
-        </div>
-
-      </section>
-
-      <!-- ── PANEL: Log ── -->
-      <section class="tab-panel" id="panel-log" role="tabpanel" aria-labelledby="tab-log" hidden>
-
-        <div class="log__header">
-          <h2 class="log__title">Conversion log</h2>
-          <span class="log__count" id="logTotal"></span>
-          <button class="log__clear" id="logClearBtn">Clear all</button>
-        </div>
-
-        <ul class="log__list" id="logList" aria-label="Conversion history">
-          <!-- Dynamic: log rows injected by JS -->
-        </ul>
-
-        <div class="log__empty" id="logEmpty">
-          <p class="log__empty-title">No conversions logged yet</p>
-          <p class="log__empty-body">Every conversion is recorded here automatically when you tap Log conversion. Your log is private to this session and this browser.</p>
-        </div>
-
-      </section>
-
-    </div><!-- /layout__right -->
-  </main>
-
-  <!-- ═══ CURRENCY PICKER DIALOG ═══ -->
   <dialog class="currency-picker" id="currencyPicker" aria-label="Select currency">
     <div class="currency-picker__header">
       <div class="currency-picker__search-wrap">
-        <img src="/starter-code/assets/images/icon-search.svg" alt="" aria-hidden="true">
-        <input
-          class="currency-picker__search"
-          id="currencySearch"
-          type="search"
-          placeholder="Search currencies..."
-          autocomplete="off"
-          aria-label="Search currencies"
-        >
+        <img src="/starter-code/assets/images/icon-search.svg" alt="">
+        <input class="currency-picker__search" id="currencySearch" type="search" placeholder="Search currencies..." autocomplete="off" spellcheck="false">
       </div>
-      <button class="currency-picker__close" id="pickerCloseBtn" aria-label="Close currency picker">✕</button>
     </div>
-
     <div class="currency-picker__body">
-      <section class="currency-picker__group">
-        <h2 class="currency-picker__group-title">
-          Popular <span class="currency-picker__count" id="popularCount"></span>
-        </h2>
-        <ul class="currency-picker__list" id="popularList" role="listbox" aria-label="Popular currencies">
-          <!-- Dynamic: popular currency rows injected by JS -->
-        </ul>
-      </section>
-
-      <section class="currency-picker__group">
-        <h2 class="currency-picker__group-title">
-          Other currencies <span class="currency-picker__count" id="otherCount"></span>
-        </h2>
-        <ul class="currency-picker__list" id="otherList" role="listbox" aria-label="Other currencies">
-          <!-- Dynamic: other currency rows injected by JS -->
-        </ul>
-      </section>
+      <div class="currency-picker__group">
+        <div class="currency-picker__group-title">
+          Popular
+          <span class="currency-picker__count" id="popularCount"></span>
+        </div>
+        <ul class="currency-picker__list" id="popularList" role="listbox" aria-label="Popular currencies"></ul>
+      </div>
+      <div class="currency-picker__group">
+        <div class="currency-picker__group-title">
+          Other currencies
+          <span class="currency-picker__count" id="otherCount"></span>
+        </div>
+        <ul class="currency-picker__list" id="otherList" role="listbox" aria-label="Other currencies"></ul>
+      </div>
     </div>
   </dialog>
 
-  <script src="/starter-code/js/app.js" type="module"></script>
 </body>
 </html>

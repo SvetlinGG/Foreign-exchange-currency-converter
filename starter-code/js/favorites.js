@@ -18,28 +18,30 @@ function getFlagCode(code) {
 
 function renderRow(base, target, rate, change) {
   const li = document.createElement('li');
-  li.className = 'favorites__item';
+  li.className = 'fav-item';
   const dir  = change >= 0 ? 'up' : 'down';
   const sign = change >= 0 ? '▲' : '▼';
   li.innerHTML = `
-    <button class="favorites__load" aria-label="Load ${base} to ${target}">
-      <img class="favorites__flag" src="/starter-code/assets/images/flags/${getFlagCode(base)}.webp" alt="${base}" onerror="this.style.display='none'">
-      <span class="favorites__pair">${base} <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="to" class="favorites__arrow"> ${target}</span>
+    <button class="fav-item__load" aria-label="Load ${base} to ${target}">
+      <img class="fav-item__flag" src="/starter-code/assets/images/flags/${getFlagCode(base)}.webp" alt="${base}" onerror="this.style.display='none'">
+      <span class="fav-item__pair">${base} <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="to" class="fav-item__arrow"> ${target}</span>
     </button>
-    <span class="favorites__rate">${rate.toFixed(4)}</span>
-    <span class="favorites__change favorites__change--${dir}">${sign} ${Math.abs(change).toFixed(2)}%</span>
-    <button class="favorites__unpin" aria-label="Unpin ${base}/${target}">
+    <div class="fav-item__values">
+      <span class="fav-item__rate">${rate.toFixed(4)}</span>
+      <span class="fav-item__change fav-item__change--${dir}">${sign} ${Math.abs(change).toFixed(2)}%</span>
+    </div>
+    <button class="fav-item__unpin" aria-label="Unpin ${base}/${target}">
       <img src="/starter-code/assets/images/icon-star-filled.svg" alt="">
     </button>
   `;
 
-  li.querySelector('.favorites__load').addEventListener('click', () => {
+  li.querySelector('.fav-item__load').addEventListener('click', () => {
     setCurrency('from', base);
     setCurrency('to', target);
     document.dispatchEvent(new CustomEvent('fx:pair-changed'));
   });
 
-  li.querySelector('.favorites__unpin').addEventListener('click', () => {
+  li.querySelector('.fav-item__unpin').addEventListener('click', () => {
     removeFavorite(base, target);
     document.dispatchEvent(new CustomEvent('fx:favorites-changed'));
   });

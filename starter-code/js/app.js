@@ -48,8 +48,8 @@ async function init() {
 
   
   const { base, target } = getLastPair();
-  setCurrency('from', base);
-  setCurrency('to', target);
+  setCurrency('from', base, true);
+  setCurrency('to', target, true);
 
   
   const count = Object.keys(currencies).length;
@@ -66,10 +66,7 @@ async function init() {
 
   
   activateTab(getLastTab());
-
-  
   await updateRate();
-  document.dispatchEvent(new CustomEvent('fx:pair-changed'));
 }
 
 init();

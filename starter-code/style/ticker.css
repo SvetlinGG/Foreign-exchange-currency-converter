@@ -23,6 +23,7 @@
   border-radius: 50%;
   width: 6px;
   height: 6px;
+  flex-shrink: 0;
 }
 
 .app-nav__ticker-wrap {
@@ -35,13 +36,12 @@
 .app-nav__ticker {
   white-space: nowrap;
   will-change: transform;
-  animation: 36s linear infinite ticker-scroll;
+  animation: ticker-scroll 36s linear infinite;
   display: flex;
+  align-items: center;
 }
 
-.app-nav__ticker:hover {
-  animation-play-state: paused;
-}
+.app-nav__ticker:hover { animation-play-state: paused; }
 
 .ticker-chip {
   border-right: 1px solid var(--neutral-600);

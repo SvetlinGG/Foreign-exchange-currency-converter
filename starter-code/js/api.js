@@ -1,4 +1,4 @@
-const BASE = 'https://api.frankfurter.dev/v1';
+const BASE = 'https://api.frankfurter.dev/v2';
 
 export async function getCurrencies() {
   const res = await fetch(`${BASE}/currencies`);

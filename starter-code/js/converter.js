@@ -54,7 +54,7 @@ function updateFavoriteBtn() {
     : '/starter-code/assets/images/icon-star.svg';
 }
 
-export function setCurrency(side, code) {
+export function setCurrency(side, code, silent = false) {
   const flagSrc = `/starter-code/assets/images/flags/${getFlagCode(code)}.webp`;
   if (side === 'from') {
     fromCodeEl.textContent = code;
@@ -65,7 +65,10 @@ export function setCurrency(side, code) {
     toFlagEl.src = flagSrc;
     toFlagEl.alt = code;
   }
-  updateRate();
+  if (!silent) {
+    updateRate();
+    document.dispatchEvent(new CustomEvent('fx:pair-changed'));
+  }
 }
 
 function getFlagCode(currencyCode) {
@@ -83,7 +86,7 @@ export function initConverter() {
   swapBtn.addEventListener('click', () => {
     const prevFrom = fromCodeEl.textContent;
     const prevTo   = toCodeEl.textContent;
-    setCurrency('from', prevTo);
+    setCurrency('from', prevTo, true);
     setCurrency('to', prevFrom);
   });
 
