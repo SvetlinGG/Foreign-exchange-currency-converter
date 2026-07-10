@@ -3,6 +3,7 @@
 @import url("./ticker.css");
 @import url("./converter.css");
 @import url("./picker.css");
+@import url("./tabs.css");
 
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
