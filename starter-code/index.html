@@ -3,178 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-<link rel="stylesheet" href="/starter-code/style/index.css">
-
+  <link rel="stylesheet" href="/starter-code/style/index.css">
   <title>Frontend Mentor | FX Checker</title>
 </head>
 <body>
 
-<!--
-  This file holds the static written content from the design so you don't have to
-  retype it. It is intentionally unstructured — building the HTML is your job.
-
-  Notes labelled "Dynamic:" mark content pulled in with JavaScript — live exchange
-  rates, or the pairs and conversions you save in the browser. Text in [square
-  brackets] is a live value that sits inside otherwise-static copy.
-
-  Labels are written in normal case even though the design shows many of them in
-  uppercase. Apply that uppercase look with CSS (text-transform: uppercase) rather
-  than capital letters in the markup — all-caps text can be read out awkwardly by
-  some screen readers. Acronyms and codes (FX, EOD, ECB, USD, EUR…) stay as-is.
--->
-
-<!-- Header -->
-<!-- Brand logo — assets/images/logo.svg (the lockup already includes the "FX_CHECKER" wordmark; use alt="FX Checker") -->
-
-<!-- Dynamic: number of available currencies, e.g. "55" -->
- <header>
-    <div class="header">
-        <div class="logo">
-            <img src="/starter-code/assets/images/logo.svg" alt="FX Checker">
-        </div>
-
-        <div class="currencies">
-            <button class="curr">55 Currencies</button>
-            <p class="point">.</p>
-            <button class="eod">EOD</button>
-            <p class="point">.</p>
-            <button class="ecb">ECB data</button>
-        </div>
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="/" class="header__logo">
+        <img src="/starter-code/assets/images/logo.svg" alt="FX Checker">
+      </a>
+      <div class="header__meta" aria-label="Data source info">
+        <span class="header__meta-item" id="currencyCount">-- Currencies</span>
+        <span class="header__meta-sep" aria-hidden="true">·</span>
+        <span class="header__meta-item">EOD</span>
+        <span class="header__meta-sep" aria-hidden="true">·</span>
+        <span class="header__meta-item">ECB data</span>
+      </div>
     </div>
- </header>
+  </header>
 
-<div class="ticker">
-  <span class="ticker__label">● Live Markets</span>
-  <div class="ticker__track">
-    <ul class="ticker__list" aria-label="Live currency rates">
-      <!-- Dynamic: ticker items -->
-    </ul>
-  </div>
-</div>
-
- <!-- Converter -->
-
- <section class="converter-section">
-    <h1>CHECK THE RATE</h1>
- 
-<div class="converter-card">
-    <div class="converter-row">
-        <div class="currency-box">
-            <!-- Dynamic: selected "send" currency — flag + code; opens the currency picker -->
-
-            <label for="sendAmount">SEND</label>
-            <!-- Dynamic: amount to convert (number input, defaults to 1,000) -->
-            <input id="sendAmount" type="number" value="1000" />
-
-            <select  id="fromCurrency">
-                <option value="USD"><img src="/starter-code/assets/images/flags/us.webp" alt="USA"></option>
-                <option value="USD">🇺🇸 USD</option>
-                <option value="EUR">🇪🇺 EUR</option>
-                <option value="GBP">🇬🇧 GBP</option>
-                <option value="JPY">🇯🇵 JPY</option>
-            </select>
-        </div>
-        <!-- Swap the send and receive currencies (icon button) -->
-        <button class="swap-btn" id="swapButton">⇆</button>
-        <!-- Dynamic: converted amount -->
-        <!-- Dynamic: selected "receive" currency — flag + code; opens the currency picker -->
-        <div class="currency-box">
-            <label for="receiveAmount">RECEIVE</label>
-            <input id="receiveAmount" type="number" value="number" readonly/>
-
-            <select id="toCurrency">
-              <option value="EUR">🇪🇺 EUR</option>
-              <option value="USD">🇺🇸 USD</option>
-              <option value="GBP">🇬🇧 GBP</option>
-              <option value="JPY">🇯🇵 JPY</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="converter-footer">
-        <!-- Dynamic: exchange rate for the active pair, e.g. "1 USD = 0.8530 EUR" -->
-        <p id="convert-ratio">1 USD = 0.8530 EUR</p>
-
-        <div class="actions">
-            <!-- Favorite toggle for the active pair — reads "Favorite" when unpinned, "Favorited" when pinned -->
-            <button class="favorite-btn">★ FAVORITED</button>
-            <button class="log-btn">LOG CONVERSATION</button>
-        </div>
-    </div>
-</div>
-</section>
-
-<dialog class="currency-picker" id="currencyPicker" aria-label="Select currency">
-  <div class="currency-picker__header">
-    <div class="currency-picker__search">
-      <img src="/starter-code/assets/images/icon-search.svg" alt="">
-      <input type="search" id="currencySearch" placeholder="Search currencies..." autocomplete="off">
-    </div>
-    <button class="currency-picker__close" aria-label="Close">✕</button>
-  </div>
-
-  <div class="currency-picker__body">
-    <section class="currency-picker__group">
-      <h2 class="currency-picker__group-title">
-        Popular <span class="currency-picker__count" id="popularCount"></span>
-      </h2>
-      <ul class="currency-picker__list" id="popularList" role="listbox">
-        <!-- Dynamic: popular currency rows -->
+  <!-- ═══ LIVE MARKETS TICKER ═══ -->
+  <div class="ticker" aria-label="Live currency rates">
+    <span class="ticker__label" aria-hidden="true">● Live Markets</span>
+    <div class="ticker__track">
+      <ul class="ticker__list" id="tickerList">
+        <!-- Dynamic: ticker items injected by JS -->
       </ul>
-    </section>
-
-    <section class="currency-picker__group">
-      <h2 class="currency-picker__group-title">
-        Other currencies <span class="currency-picker__count" id="otherCount"></span>
-      </h2>
-      <ul class="currency-picker__list" id="otherList" role="listbox">
-        <!-- Dynamic: other currency rows -->
-      </ul>
-    </section>
+    </div>
   </div>
-</dialog>
 
-</section>
+  <!-- ═══ MAIN LAYOUT ═══ -->
+  <main class="layout">
 
-<div class="tab-panels">
-  <section class="tab-panel" id="panel-history" role="tabpanel" aria-labelledby="tab-history">
-    <div class="history__stats">
-      <div class="history__stat">
-        <span class="history__stat-label">Open</span>
-        <span class="history__stat-value" id="historyOpen">--</span>
-      </div>
-      <div class="history__stat">
-        <span class="history__stat-label">Last</span>
-        <span class="history__stat-value" id="historyLast">--</span>
-      </div>
-      <div class="history__stat">
-        <span class="history__stat-label">Change</span>
-        <span class="history__stat-value" id="historyChange">--</span>
-      </div>
-      <div class="history__stat">
-        <span class="history__stat-label">% Change</span>
-        <span class="history__stat-value" id="historyPctChange">--</span>
-      </div>
+    <!-- ── LEFT COLUMN: Converter ── -->
+    <div class="layout__left">
+      <section class="converter" aria-labelledby="converterHeading">
+        <h1 class="converter__heading" id="converterHeading">Check the rate</h1>
+
+        <div class="converter__card">
+
+          <!-- Send -->
+          <div class="converter__field">
+            <label class="converter__label" for="sendAmount">Send</label>
+            <div class="converter__input-row">
+              <input
+                class="converter__amount"
+                id="sendAmount"
+                type="number"
+                value="1000"
+                min="0"
+                aria-label="Amount to send"
+              >
+              <button
+                class="converter__currency-btn"
+                id="fromCurrencyBtn"
+                aria-haspopup="dialog"
+                aria-label="Select send currency"
+              >
+                <img class="converter__flag" id="fromFlag" src="/starter-code/assets/images/flags/us.webp" alt="">
+                <span id="fromCode">USD</span>
+                <img src="/starter-code/assets/images/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </button>
+            </div>
+          </div>
+
+          <!-- Swap -->
+          <button class="converter__swap" id="swapBtn" aria-label="Swap currencies">
+            <img src="/starter-code/assets/images/icon-exchange-vertical.svg" alt="">
+          </button>
+
+          <!-- Receive -->
+          <div class="converter__field">
+            <label class="converter__label" for="receiveAmount">Receive</label>
+            <div class="converter__input-row">
+              <input
+                class="converter__amount"
+                id="receiveAmount"
+                type="text"
+                readonly
+                aria-label="Converted amount"
+                aria-live="polite"
+              >
+              <button
+                class="converter__currency-btn"
+                id="toCurrencyBtn"
+                aria-haspopup="dialog"
+                aria-label="Select receive currency"
+              >
+                <img class="converter__flag" id="toFlag" src="/starter-code/assets/images/flags/eu.webp" alt="">
+                <span id="toCode">EUR</span>
+                <img src="/starter-code/assets/images/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </button>
+            </div>
+          </div>
+
+          <!-- Rate + Actions -->
+          <div class="converter__footer">
+            <p class="converter__rate" id="convertRate" aria-live="polite">1 USD = -- EUR</p>
+            <div class="converter__actions">
+              <button class="converter__favorite" id="favoriteBtn" aria-pressed="false">
+                <img src="/starter-code/assets/images/icon-star.svg" alt="" aria-hidden="true">
+                <span id="favoriteBtnLabel">Favorite</span>
+              </button>
+              <button class="converter__log" id="logBtn">
+                <img src="/starter-code/assets/images/icon-arrow-right.svg" alt="" aria-hidden="true">
+                Log conversion
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
     </div>
 
-    <div class="history__range" role="group" aria-label="Chart range">
-      <button class="history__range-btn history__range-btn--active" aria-pressed="true">1D</button>
-      <button class="history__range-btn" aria-pressed="false">1W</button>
-      <button class="history__range-btn" aria-pressed="false">1M</button>
-      <button class="history__range-btn" aria-pressed="false">3M</button>
-      <button class="history__range-btn" aria-pressed="false">1Y</button>
-      <button class="history__range-btn" aria-pressed="false">5Y</button>
-    </div>
+    <!-- ── RIGHT COLUMN: Tabs ── -->
+    <div class="layout__right">
 
-    <div class="history__chart-header">
-      <span id="chartPair"></span>
-      <span id="chartRate"></span>
-    </div>
+      <!-- Tab nav -->
+      <nav class="tabs" aria-label="Currency tools">
+        <ul class="tabs__list" role="tablist">
+          <li role="presentation">
+            <button class="tabs__tab tabs__tab--active" role="tab" id="tab-history"
+              aria-selected="true" aria-controls="panel-history">History</button>
+          </li>
+          <li role="presentation">
+            <button class="tabs__tab" role="tab" id="tab-compare"
+              aria-selected="false" aria-controls="panel-compare">Compare</button>
+          </li>
+          <li role="presentation">
+            <button class="tabs__tab" role="tab" id="tab-favorites"
+              aria-selected="false" aria-controls="panel-favorites">
+              Favorites
+              <span class="tabs__badge" id="favoritesCount" aria-label="favorited pairs"></span>
+            </button>
+          </li>
+          <li role="presentation">
+            <button class="tabs__tab" role="tab" id="tab-log"
+              aria-selected="false" aria-controls="panel-log">
+              Log
+              <span class="tabs__badge" id="logCount" aria-label="logged conversions"></span>
+            </button>
+          </li>
+        </ul>
+      </nav>
 
-    <div class="history__chart" id="historyChart" aria-label="Rate history chart"></div>
+      <!-- ── PANEL: History ── -->
+      <section class="tab-panel" id="panel-history" role="tabpanel" aria-labelledby="tab-history">
 
-    <div class="history__error" id="historyError" hidden>
-      <p>No chart data available</p>
-    
+        <div class="history__stats" aria-label="Rate statistics">
+          <div class="history__stat">
+            <span class="history__stat-label">Open</span>
+            <span class="history__stat-value" id="historyOpen">--</span>
+          </div>
+          <div class="history__stat">
+            <span class="history__stat-label">Last</span>
+            <span class="history__stat-value" id="historyLast">--</span>
+          </div>
+          <div class="history__stat">
+            <span class="history__stat-label">Change</span>
+            <span class="history__stat-value" id="historyChange">--</span>
+          </div>
+          <div class="history__stat">
+            <span class="history__stat-label">% Change</span>
+            <span class="history__stat-value" id="historyPctChange">--</span>
+          </div>
+        </div>
+
+        <div class="history__toolbar">
+          <div class="history__pair">
+            <span id="chartPair"
