@@ -174,4 +174,133 @@
 
         <div class="history__toolbar">
           <div class="history__pair">
-            <span id="chartPair"
+            <span id="chartPair">USD/EUR</span>
+            <span id="chartRate"></span>
+          </div>
+          <div class="history__range" role="group" aria-label="Chart time range">
+            <button class="history__range-btn history__range-btn--active" aria-pressed="true" data-range="1D">1D</button>
+            <button class="history__range-btn" aria-pressed="false" data-range="1W">1W</button>
+            <button class="history__range-btn" aria-pressed="false" data-range="1M">1M</button>
+            <button class="history__range-btn" aria-pressed="false" data-range="3M">3M</button>
+            <button class="history__range-btn" aria-pressed="false" data-range="1Y">1Y</button>
+            <button class="history__range-btn" aria-pressed="false" data-range="5Y">5Y</button>
+          </div>
+        </div>
+
+        <div class="history__chart" id="historyChart" aria-label="Rate history chart"></div>
+
+        <div class="history__error" id="historyError" hidden>
+          <p class="history__error-title">No chart data available</p>
+          <p class="history__error-body">
+            We couldn't load rate history for <strong id="errorPair"></strong> right now.
+            This usually clears up in a minute.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ── PANEL: Compare ── -->
+      <section class="tab-panel" id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
+
+        <div class="compare__header">
+          <h2 class="compare__title">Multi-currency</h2>
+          <p class="compare__meta">
+            <span id="compareAmount"></span>
+            <span class="compare__count" id="compareCount"></span>
+          </p>
+        </div>
+
+        <ul class="compare__list" id="compareList" aria-label="Currency comparison">
+          <!-- Dynamic: comparison rows injected by JS -->
+        </ul>
+
+        <div class="compare__empty" id="compareEmpty">
+          <p class="compare__empty-title">No comparison available</p>
+          <p class="compare__empty-body">Enter an amount in Send above to see what your money is worth in other currencies.</p>
+        </div>
+
+      </section>
+
+      <!-- ── PANEL: Favorites ── -->
+      <section class="tab-panel" id="panel-favorites" role="tabpanel" aria-labelledby="tab-favorites" hidden>
+
+        <div class="favorites__header">
+          <h2 class="favorites__title">Pinned pairs</h2>
+          <span class="favorites__count" id="favoritesTotal"></span>
+        </div>
+
+        <ul class="favorites__list" id="favoritesList" aria-label="Pinned currency pairs">
+          <!-- Dynamic: favorite rows injected by JS -->
+        </ul>
+
+        <div class="favorites__empty" id="favoritesEmpty">
+          <p class="favorites__empty-title">No pinned pairs yet</p>
+          <p class="favorites__empty-body">Pin a pair to track its rate here. Tap the star icon on any conversion or comparison row.</p>
+        </div>
+
+      </section>
+
+      <!-- ── PANEL: Log ── -->
+      <section class="tab-panel" id="panel-log" role="tabpanel" aria-labelledby="tab-log" hidden>
+
+        <div class="log__header">
+          <h2 class="log__title">Conversion log</h2>
+          <span class="log__count" id="logTotal"></span>
+          <button class="log__clear" id="logClearBtn">Clear all</button>
+        </div>
+
+        <ul class="log__list" id="logList" aria-label="Conversion history">
+          <!-- Dynamic: log rows injected by JS -->
+        </ul>
+
+        <div class="log__empty" id="logEmpty">
+          <p class="log__empty-title">No conversions logged yet</p>
+          <p class="log__empty-body">Every conversion is recorded here automatically when you tap Log conversion. Your log is private to this session and this browser.</p>
+        </div>
+
+      </section>
+
+    </div><!-- /layout__right -->
+  </main>
+
+  <!-- ═══ CURRENCY PICKER DIALOG ═══ -->
+  <dialog class="currency-picker" id="currencyPicker" aria-label="Select currency">
+    <div class="currency-picker__header">
+      <div class="currency-picker__search-wrap">
+        <img src="/starter-code/assets/images/icon-search.svg" alt="" aria-hidden="true">
+        <input
+          class="currency-picker__search"
+          id="currencySearch"
+          type="search"
+          placeholder="Search currencies..."
+          autocomplete="off"
+          aria-label="Search currencies"
+        >
+      </div>
+      <button class="currency-picker__close" id="pickerCloseBtn" aria-label="Close currency picker">✕</button>
+    </div>
+
+    <div class="currency-picker__body">
+      <section class="currency-picker__group">
+        <h2 class="currency-picker__group-title">
+          Popular <span class="currency-picker__count" id="popularCount"></span>
+        </h2>
+        <ul class="currency-picker__list" id="popularList" role="listbox" aria-label="Popular currencies">
+          <!-- Dynamic: popular currency rows injected by JS -->
+        </ul>
+      </section>
+
+      <section class="currency-picker__group">
+        <h2 class="currency-picker__group-title">
+          Other currencies <span class="currency-picker__count" id="otherCount"></span>
+        </h2>
+        <ul class="currency-picker__list" id="otherList" role="listbox" aria-label="Other currencies">
+          <!-- Dynamic: other currency rows injected by JS -->
+        </ul>
+      </section>
+    </div>
+  </dialog>
+
+  <script src="/starter-code/js/app.js" type="module"></script>
+</body>
+</html>
