@@ -1,63 +1,72 @@
-.ticker {
+.app-nav__markets {
+  align-items: stretch;
+  height: 44px;
   display: flex;
-  align-items: center;
-  height: var(--ticker-height);
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
   overflow: hidden;
-  gap: var(--space-4);
 }
 
-.ticker__label {
+.app-nav__live {
+  background: var(--lime-500);
+  color: var(--neutral-900);
+  letter-spacing: 1px;
   flex-shrink: 0;
-  padding: 0 var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  font-size: 10px;
   font-weight: 700;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-  border-right: 1px solid var(--color-border);
+  display: flex;
 }
 
-.ticker__track {
+.app-nav__dot {
+  background: var(--neutral-900);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+}
+
+.app-nav__ticker-wrap {
   flex: 1;
+  align-items: center;
+  display: flex;
   overflow: hidden;
 }
 
-.ticker__list {
+.app-nav__ticker {
+  white-space: nowrap;
+  will-change: transform;
+  animation: 36s linear infinite ticker-scroll;
   display: flex;
-  gap: var(--space-8);
-  width: max-content;
-  animation: ticker-scroll 40s linear infinite;
 }
 
-.ticker__track:hover .ticker__list {
+.app-nav__ticker:hover {
   animation-play-state: paused;
 }
 
-.ticker__item {
-  display: flex;
+.ticker-chip {
+  border-right: 1px solid var(--neutral-600);
+  flex-shrink: 0;
   align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  white-space: nowrap;
+  gap: 10px;
+  height: 44px;
+  padding: 0 20px;
+  display: flex;
 }
 
-.ticker__pair {
-  color: var(--color-text-secondary);
-  font-weight: 500;
+.ticker-chip__pair {
+  letter-spacing: 1px;
+  color: var(--neutral-200);
+  font-size: 11px;
 }
 
-.ticker__rate {
-  color: var(--color-text-primary);
-  font-weight: 700;
+.ticker-chip__rate {
+  letter-spacing: .5px;
+  color: var(--neutral-50);
+  font-size: 12px;
 }
 
-.ticker__change--up   { color: var(--color-up); }
-.ticker__change--down { color: var(--color-down); }
+.ticker-chip__change--up   { color: var(--green-500); font-size: 11px; }
+.ticker-chip__change--down { color: var(--red-500);   font-size: 11px; }
 
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
