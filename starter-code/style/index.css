@@ -4,6 +4,11 @@
 @import url("./converter.css");
 @import url("./picker.css");
 @import url("./tabs.css");
+@import url("./history.css");
+@import url("./compare.css");
+@import url("./favorites.css");
+@import url("./log.css");
+@import url("./responsive.css");
 
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
