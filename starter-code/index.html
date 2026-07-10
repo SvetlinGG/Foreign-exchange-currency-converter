@@ -45,13 +45,14 @@
     </div>
  </header>
 
- <!-- Live markets ticker — auto-scrolls across the page, pauses on hover -->
-
-<!-- Dynamic: scrolling list of currency pairs, each with its rate and 24h change (▲ up / ▼ down) -->
-
- <main class="market">
-    <div class="ticker-label">● LIVE MARKETS</div>
- </main>
+<div class="ticker">
+  <span class="ticker__label">● Live Markets</span>
+  <div class="ticker__track">
+    <ul class="ticker__list" aria-label="Live currency rates">
+      <!-- Dynamic: ticker items -->
+    </ul>
+  </div>
+</div>
 
  <!-- Converter -->
 
